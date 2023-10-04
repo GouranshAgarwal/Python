@@ -108,12 +108,20 @@ class note:
 # to merge 2 notes as of now, takes the input from the user which contains the position of the later note which will be merged with the previous one ( giving an error, seemingly " index out of the list range " type error)
 
     def merge(self):
+        #here it is only working if the number of element is greater than 3, if the number of notes is 3 or less it is executing the else part
+        
         self.num = int(input("enter the note id of note you want to merge with the previous one: "))
-        if self.num not in self.__all_notes_id__:
-            print("not a valid note id !")
+        if self.num in self.__all_notes_id__:
+            if self.num > 1:
+                self.all_notes[self.num - 2] += " " + self.all_notes[self.num - 1]
+                del self.all_notes[self.num - 1]
+                del self.__all_notes_id__[self.num - 1]
+            else:
+                print("Cannot merge with the first note.")
         else:
-            self.all_notes[self.num - 1]+=" "+self.all_notes[self.num]
-            self.all_notes.remove(self.all_notes[self.num])
+            print("not a valid note id!")
+
+       
 
 #main function that will execute all the tasks
 
